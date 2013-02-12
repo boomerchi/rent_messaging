@@ -1,0 +1,476 @@
+[
+  {
+    "number": "001",
+    "street": "Akacievej",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Akelejehaven",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Rødegårdsvej",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "001",
+    "street": "Rødegårdsvej",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "002",
+    "street": "Rådyrvej",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "001",
+    "street": "Rådyrvej",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "004",
+    "street": "Bøllemosegårdsvej",
+    "city": "Øbro",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Bøllemosegårdsvej",
+    "city": "Venners",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Havlyngbuen",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Havlyngbuen",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "051",
+    "street": "Hedegaardsvej",
+    "city": "Engdraget",
+    "region": "København"
+  },
+  {
+    "number": "123",
+    "street": "Hedegaardsvej",
+    "city": "Elmely",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Kastanjegang",
+    "city": "Strandhøj",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Kastanjegang",
+    "city": "Strandhøj",
+    "region": "København"
+  },
+  {
+    "number": "009",
+    "street": "Kløvermarksvej",
+    "city": "Vennelyst",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Konkyliestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Konkyliestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Koralstien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Koralstien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "004",
+    "street": "Lersøstien",
+    "city": "Aldersro",
+    "region": "København"
+  },
+  {
+    "number": "180",
+    "street": "Lersøstien",
+    "city": "Aldersro",
+    "region": "København"
+  },
+  {
+    "number": "Lersøstien",
+    "street": "",
+    "city": "4.",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Lindegang",
+    "city": "Strandhøj",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Lindegang",
+    "city": "Strandhøj",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Lupingang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Lupingang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Muslingestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Muslingestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Rosengang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Rosengang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "004",
+    "street": "Rørsøstien",
+    "city": "Fremtiden",
+    "region": "København"
+  },
+  {
+    "number": "003",
+    "street": "Rørsøstien",
+    "city": "Blomsten",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Strandgang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Strandgang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Syrengang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Syrengang",
+    "city": "Strandlyst",
+    "region": "København"
+  },
+  {
+    "number": "002",
+    "street": "Søanemonestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Søanemonestien",
+    "city": "Amager",
+    "region": "København"
+  },
+  {
+    "number": "039",
+    "street": "Ved Kastrupfortet",
+    "city": "Fortbo",
+    "region": "København"
+  },
+  {
+    "number": "158",
+    "street": "Vigerslev Allé",
+    "city": "Danshøj",
+    "region": "København"
+  },
+  {
+    "number": "001",
+    "street": "Bellevue Strand",
+    "city": "Klampenborg",
+    "region": "Gentofte"
+  },
+  {
+    "number": "015",
+    "street": "Tofteledet",
+    "city": "Hjortespring",
+    "region": "Herlev"
+  },
+  {
+    "number": "002",
+    "street": "Bousagervej",
+    "city": "Albertslund",
+    "region": "Albertslund"
+  },
+  {
+    "number": "001",
+    "street": "Bousagervej",
+    "city": "Albertslund",
+    "region": "Albertslund"
+  },
+  {
+    "number": "002",
+    "street": "Agrovej",
+    "city": "Klovtofte",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Agrovej",
+    "city": "Klovtofte",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Akacievej",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Sandet",
+    "city": "Kr",
+    "region": "Furesø"
+  },
+  {
+    "number": "001",
+    "street": "Sandet",
+    "city": "Kr",
+    "region": "Furesø"
+  },
+  {
+    "number": "002",
+    "street": "Skandrups Alle",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "001",
+    "street": "Skandrups Alle",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+  {
+    "number": "002",
+    "street": "Skov Alle",
+    "city": "Hareskov",
+    "region": "Furesø"
+  },
+    {
+    "number": "002",
+    "street": "Stendiget",
+    "city": "Sengeløse",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Stendiget",
+    "city": "Sengeløse",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Stenrølds Alle",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Stjernedalen",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Stjernedalen",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Storager",
+    "city": "Baldersbr.",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Storengen",
+    "city": "Baldersbr.",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Storengen",
+    "city": "Baldersbr.",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Struergade",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Struergade",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Strømsvej",
+    "city": "Sengeløse",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "226",
+    "street": "Stærkendevej",
+    "city": "Stærkende",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "236",
+    "street": "Stærkendevej",
+    "city": "Stærkende",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "250",
+    "street": "Stærkendevej",
+    "city": "Stærkende",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "133",
+    "street": "Stærkendevej",
+    "city": "Vindinge",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "155",
+    "street": "Stærkendevej",
+    "city": "Stærkende",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Svinget",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Svinget",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Sydstjernen",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Sydstjernen",
+    "city": "Fløng",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Sylen",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Sylen",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "034",
+    "street": "Syrenhegnet",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Syrenhegnet",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Sømosevej",
+    "city": "Reerslev",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "002",
+    "street": "Sønderby Torv",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  },
+  {
+    "number": "001",
+    "street": "Sønderby Torv",
+    "city": "Høje",
+    "region": "Høje-Taastrup"
+  }
+]
