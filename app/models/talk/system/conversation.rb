@@ -16,9 +16,13 @@ module Talk
 
       belongs_to :sys_conversable,  polymorphic: true
 
+      has_many :dialogs,      class_name: 'Talk::System::Dialog'
+
       before_validation do
         self.type = :system
       end
+
+      # validates_with ConversationValidator      
 
       # any account is a conversable?
       # belongs_to :tenant,     class_name: 'Account::Tenant',    inverse_of: :property_conversations
@@ -37,24 +41,73 @@ module Talk
         self.sys_conversable = account
       end
 
-      def add_dialog type = :info
-        dialogs << System::Dialog.about(type)
+      def add_dialog state = :info
+        dialogs.create state: state, conversation: self
+      end
+
+      def clear_dialogs!
+        dialogs.each {|dialog| dialog.destroy }
+      end      
+
+      def system_account
+        Account::System.instance
       end
 
       def initiator
-        :system
+        system_account
       end
 
       def initiated_by? type
-        initiator == type
+        case type
+        when Symbol, String
+          initiator.type == type.to_s
+        when Account::Base
+          initiated_by? type.type # type is an account
+        else
+          raise ArgumentError, "Must compare with Account or type as String or Symbol, was: #{type}"
+        end
       end
 
-      alias_method :replier, :sys_conversable
-      alias_method :account, :sys_conversable
+      def find_or_create_dialog which = :last
+        dialogs.empty? ? new_dialog : find_dialog(which)
+      end
+
+      def new_dialog
+        dialog = Talk::System::Dialog.create conversation: self
+        self.dialogs << dialog
+        dialog
+      end
+
+      def find_dialog which = :last
+        case which
+        when :last
+          dialogs.last
+        when Fixnum
+          dialogs[which]
+        else
+          raise ArgumentError, "Not sure which: #{which} dialog you want to use"
+        end      
+      end
+
+      alias_method :receiver, :sys_conversable
+      alias_method :account,  :sys_conversable
+
+      def replier
+        nil
+      end
+
+      def system?
+        true
+      end
 
       class << self
-        def conversation account
+        def conversation_with account
           self.create sys_conversable: account
+        end
+        alias_method :with, :conversation_with
+
+        def create_with account
+          self.find_or_create_by sys_conversable: account
         end
       end
     end

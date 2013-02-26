@@ -13,6 +13,8 @@ describe Talk::Property::Dialog do
   context 'Personal Tenant <-> Landlord' do
     let(:dialog) { create :valid_property_dialog, conversation: conversation, message_count: 2 }
 
+    its(:valid) { should be_true }
+
     describe 'conversation' do
       its(:conversation) { should be_a Talk::Property::Conversation }
 

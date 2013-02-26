@@ -1,7 +1,7 @@
 module Talk
-  module Property
+  module System
     class Message < Talk::Message
-      embedded_in :dialog, class_name: 'Talk::Property::Dialog', inverse_of: :messages
+      embedded_in :dialog, class_name: 'Talk::System::Dialog', inverse_of: :messages
 
       alias_method :property_dialog, :dialog
       alias_method :thread, :dialog
@@ -10,18 +10,19 @@ module Talk
       delegate :type, :conversation,  to: :property_dialog
       delegate :property,             to: :property_dialog
 
-      field :sender_type, type: String
-
       validates :dialog,      presence: true
-      validates :sender_type, presence: true, inclusion: {in: ['system', 'tenant', 'landlord']}
 
-      def self.from sender_type, message, dialog
-        self.create construct_args(sender_type, message, dialog)
+      def sender_type
+        :system
+      end
+
+      def self.construct message, dialog
+        self.create construct_args(message, dialog)
       end
 
       protected
 
-      def self.construct_args sender_type, message, dialog
+      def self.construct_args message, dialog
         message_args(message).merge(sender_type: sender_type, dialog: dialog)
       end
 

@@ -3,22 +3,15 @@ require 'spec_helper'
 describe Talk::System::Dialog do
   subject { dialog }
 
-  let(:tenant_dialog)   { create :system_dialog, conversation: tenant_conversation }
-  let(:landlord_dialog) { create :system_dialog, conversation: landlord_conversation }  
-
-  let(:tenant_conversation)   { create :system_tenant_conversation }
-  let(:landlord_conversation) { create :system_landlord_conversation }
+  let(:conversation) { create :system_tenant_conversation }
 
   context 'System -> Tenant dialog' do
-    let(:dialog)       { tenant_dialog }
-    let(:conversation) { tenant_conversation }
+    let(:dialog) { create :valid_system_dialog, conversation: conversation }
 
-    before do
-      conversation.dialogs << dialog
-    end
+    its(:valid) { should be_true }
 
     describe 'type' do
-      its(:type) { should == 'tenant' }
+      its(:type) { should == 'system' }
     end  
 
     describe 'state' do

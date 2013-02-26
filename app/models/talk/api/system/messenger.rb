@@ -5,14 +5,18 @@ module Talk::Api::System
     attr_accessor :message
 
     def initialize message, type = :info
-      @message = {body: message, type: type}
+      @message = Hashie::Mash.new body: message, type: type, state: type
     end
 
     def to user_account
+      validate_user user_account
+      Talk::Api::System::Conversator.new self, user_account
+    end
+
+    def validate_user user_account
       unless user_account.kind_of?(Account::User)
         raise ArgumentError, "Must be an Account::User, was: #{user_account}"
       end
-      Talk::Api::System::Conversator.new self, user_account
     end
   end
 end

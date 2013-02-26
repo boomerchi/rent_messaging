@@ -8,8 +8,10 @@ describe Talk::Property::Conversation do
 
   let(:system)        { Account::System.instance }
   let(:tenant)        { create :tenant }
-  let(:landlord)      { create :landlord }
-  let(:property)      { create :property }
+  let(:landlord)      { create :landlord_w_property }
+  let(:property)      { landlord.property }
+
+  let(:landlord_without)  { create :landlord }
 
   Conversation  = Talk::Property::Conversation
   Dialog        = Talk::Property::Dialog
@@ -30,7 +32,7 @@ describe Talk::Property::Conversation do
 
         context 'about landlord default property' do 
           before do
-            landlord.property = create :property
+            landlord.property = create :property, landlord: landlord
           end
 
           it 'should be valid' do
@@ -40,7 +42,7 @@ describe Talk::Property::Conversation do
 
         context 'about landlord default property - but not set!' do 
           it 'should be valid' do
-            expect {clazz.create tenant: tenant, landlord: landlord}.to raise_error(Property::DefaultNotFoundError)
+            expect {clazz.create tenant: tenant, landlord: landlord_without}.to raise_error(Property::DefaultNotFoundError)
           end
         end
       end
@@ -78,7 +80,7 @@ describe Talk::Property::Conversation do
         context 'NOT about a property' do
           context 'landlord has no default property' do
             it 'should error when trying to use landlord default property' do
-              expect { clazz.create landlord: landlord }.to raise_error(Property::DefaultNotFoundError)
+              expect { clazz.create landlord: landlord_without }.to raise_error(Property::DefaultNotFoundError)
             end
           end
 

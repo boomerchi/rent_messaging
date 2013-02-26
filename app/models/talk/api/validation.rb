@@ -12,7 +12,16 @@ module Talk::Api
     end
 
     def sender_error! sender
-      raise ArgumentError, "Must be a #{sender_class}, was: #{sender}" unless valid_sender? sender
+      raise Talk::Conversation::SenderError, "Sender must be a #{sender_class}, was: #{sender}" unless valid_sender? sender
+    end
+
+    # if landlord, there must already be a dialog started 
+    # with at least one message from tenant or system
+    def validate_sending!
+      return unless sender.kind_of? Account::Landlord
+      get_property_dialog
+    rescue Talk::Property::Conversation::NotFoundError
+      raise Talk::Conversation::InitiationError, "Sender #{sender} can't initiate a conversation or dialog: receiver: #{receiver.inspect} property: #{property.inspect}"
     end
 
     # receiver
@@ -22,7 +31,7 @@ module Talk::Api
     end
 
     def receiver_error! receiver
-      raise ArgumentError, "Must be a #{receiver_class}, was: #{receiver}"
+      raise Talk::Conversation::ReceiverError, "Receiver must be a #{receiver_class}, was: #{receiver}"
     end
 
     def valid_receiver? receiver

@@ -1,4 +1,6 @@
-source :rubygems
+source 'https://rubygems.org'
+
+ruby '1.9.3'
 
 # Declare your gem's dependencies in rent_messaging.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and

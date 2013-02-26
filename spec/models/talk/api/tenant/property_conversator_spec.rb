@@ -122,7 +122,7 @@ describe Talk::Api::Tenant::PropertyConversator do
     end
 
     describe 'send_it!' do
-      it 'should be sent' do
+      it 'should error' do
         expect { subject.send_it! }.to raise_error(Talk::Api::DialogNotFoundError)
       end
     end    

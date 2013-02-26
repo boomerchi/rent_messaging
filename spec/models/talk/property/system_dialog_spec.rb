@@ -14,6 +14,8 @@ describe Talk::Property::Dialog do
   context 'System -> Tenant' do    
     let(:dialog) { create :valid_property_dialog, conversation: conversation, message_count: 2 }
 
+    its(:valid) { should be_true }
+
     describe 'type' do
       its(:type) { should == 'system' }
     end  

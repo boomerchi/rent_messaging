@@ -1,10 +1,24 @@
 FactoryGirl.define do
 
   factory :system_dialog, class: 'Talk::System::Dialog' do 
+    ignore do
+      message_count 0
+    end
+
     trait :valid do
-      after :build do |dialog|
-        FactoryGirl.create :message, dialog: dialog
+      after :build do |dialog, evaluator|
+        evaluator.message_count.times do
+          dialog.messages << FactoryGirl.create(:system_message, dialog: dialog)
+        end
       end
+    end
+
+    trait :rejected do
+      state 'rejected'  
+    end
+
+    trait :accepted do
+      state 'accepted'  
     end
 
     trait :info do

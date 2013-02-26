@@ -43,8 +43,12 @@ describe Talk::Property::Conversation do
       its(:system?) { should be_true }
     end
 
+    describe 'receiver' do
+      its(:receiver) { should be_an Account::Tenant }
+    end
+
     describe 'replier' do
-      its(:replier) { should be_an Account::Tenant }
-    end    
+      its(:replier) { should be_nil }
+    end
   end
 end

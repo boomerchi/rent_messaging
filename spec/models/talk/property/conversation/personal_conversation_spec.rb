@@ -10,7 +10,8 @@ describe Talk::Property::Conversation do
   let(:tenant)        { create :tenant }
   let(:landlord)      { create :landlord }
   let(:landlord_prop) { create :landlord_w_property }
-  let(:property)      { create :property }
+  let(:property)      { landlord_prop.property }
+  let(:other_prop)    { create :property }
 
   let(:sender)        { tenant }
   let(:receiver)      { landlord }

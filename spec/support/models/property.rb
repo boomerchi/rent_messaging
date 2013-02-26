@@ -8,7 +8,7 @@ class Property
 
   alias_method :title, :name
 
-  belongs_to :conversation, class_name: 'Talk::Property::Conversation', inverse_of: :property
+  has_many :conversations, class_name: 'Talk::Property::Conversation', inverse_of: :property
 
   belongs_to :owner,    class_name: 'Account::Landlord', inverse_of: :default_property
   

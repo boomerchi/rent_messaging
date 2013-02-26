@@ -39,9 +39,7 @@ module Talk
     id:           #{id}
     conversation: #{conversation.id if respond_to? :conversation}
 
-    user:         #{landlord.name}
-    property:     #{property.title}
-
+    receiver:     #{receiver.name if receiver}
     state:        #{state}
 
     messages:     #{messages}

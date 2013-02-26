@@ -4,6 +4,10 @@ module Talk::Api::Landlord
       super
     end
 
+    def to receiver
+      conversator_for receiver
+    end        
+
     def sender_class
       Account::Landlord
     end    

@@ -6,8 +6,18 @@ FactoryGirl.define do
     end
 
     trait :w_property do
+      ignore do
+        property_count 0
+      end
+
       after :build do |landlord, evaluator|
-        landlord.property = FactoryGirl.create :property, landlord: landlord, owner: landlord
+        if evaluator.property_count == 0
+          landlord.property = FactoryGirl.create(:property, landlord: landlord, owner: landlord)
+        end
+
+        evaluator.property_count.times do
+          landlord.properties << FactoryGirl.create(:property, landlord: landlord, owner: landlord)
+        end
       end
     end
 

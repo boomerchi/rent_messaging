@@ -8,7 +8,7 @@ module Talk::Api::User
     def initialize sender, message, type = :info
       validate_sender! sender
       @sender_account = sender
-      @message = Hashie::Mash.new(body: message, type: type)
+      @message = Hashie::Mash.new body: message, type: type, state: type
     end
 
     alias_method :sender, :sender_account
