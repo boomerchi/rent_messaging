@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = RentMessaging::VERSION
   s.authors     = ["Kristian Mandrup"]
   s.email       = ["kmandrup@gmail.com"]
-  s.homepage    = "danrent.dk"
+  s.homepage    = "http://www.danrent.dk"
   s.summary     = "Messaging"
   s.description = "Handles messaging"
 
