@@ -1,13 +1,12 @@
 class User::Account::User
   class PropertyMessenger
+    include Talk::Validation
+
     attr_accessor :account, :target_account, :property
 
     def initialize account, property = nil
-      unless account.kind_of?(Account::Base)
-        raise ArgumentError, "Not a valid account. Was: #{account}" 
-      end
+      validate_account! account
       @account  = account
-
       about(property) if property 
     end
 
@@ -16,10 +15,7 @@ class User::Account::User
     alias_method :all_property_conversations, :property_conversations
 
     def about property
-      # TODO extract to validate method
-      unless property.kind_of?(Property)
-        raise ArgumentError, "Not a valid property. Was: #{property}"
-      end
+      validate_property property
       @property = property      
     end
 
@@ -30,28 +26,11 @@ class User::Account::User
     end
 
     def get_conversations
-      property? ? select_property_conversations : all_property_conversations
+      property ? select_property_conversations : all_property_conversations
     end
 
     def select_property_conversations
       property_conversations.where property: property.id
-    end
-
-    # TODO: Refator into shared module!
-    def system?
-      target_account.kind_of? Account::System
-    end
-
-    def landlord?
-      target_account.kind_of? User::Account::Landlord
-    end
-
-    def tenant?
-      target_account.kind_of? User::Account::Tenant
-    end
-
-    def property?
-      !property.nil?
     end
 
     protected
@@ -82,8 +61,9 @@ class User::Account::User
       property ? {property: property.id} : {}
     end
 
+    # validations
     def find_key
-      account_types.find{|key| send("#{key}?") }
+      account_types.find{|key| send("#{key}?", target_account) }
     end
 
     def user_conversation

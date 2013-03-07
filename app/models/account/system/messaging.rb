@@ -2,6 +2,8 @@ class Account::System
   module Messaging
     extend ActiveSupport::Concern
 
+    include Talk::Validation
+
     included do
       include ::Talk::Api::System
 
@@ -33,7 +35,7 @@ class Account::System
     end    
 
     def property_messenger property = nil
-      Account::User::PropertyMessenger.new self, property
+      User::Account::User::PropertyMessenger.new self, property
     end
 
     protected
@@ -41,14 +43,6 @@ class Account::System
     def it_matches account
       landlord? account ? {landlord: account.id} : {tenant: account.id}
     end
-
-    def landlord? target_account
-      target_account.kind_of? Account::Landlord
-    end
-
-    def tenant? target_account
-      target_account.kind_of? Account::Tenant
-    end    
   end
 end
 

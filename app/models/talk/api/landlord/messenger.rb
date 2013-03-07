@@ -9,7 +9,7 @@ module Talk::Api::Landlord
     end        
 
     def sender_class
-      Account::Landlord
+      User::Account::Landlord
     end    
   end
 end

@@ -32,13 +32,29 @@ module Talk
       alias_method :landlord, :sys_conversable
 
       def tenant= account
-        raise ArgumentError, "Must be a tenant account, was: #{account}" unless account.kind_of?(Account::Tenant)
+        validate_tenant! account
         self.sys_conversable = account
       end
 
       def landlord= account
-        raise ArgumentError, "Must be a landlord account, was: #{account}" unless account.kind_of?(Account::Landlord)
+        validate_landlord! account
         self.sys_conversable = account
+      end
+
+      def validate_tenant! account
+        raise ArgumentError, "Must be a tenant account, was: #{account}" unless tenant? account
+      end
+
+      def tenant? account
+        account.kind_of?(User::Account::Tenant)
+      end
+
+      def validate_landlord! account
+        raise ArgumentError, "Must be a landlord account, was: #{account}" unless landlord? account
+      end
+
+      def landlord? account
+        account.kind_of?(User::Account::Landlord)
       end
 
       def add_dialog state = :info

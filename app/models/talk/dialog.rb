@@ -11,7 +11,8 @@ module Talk
     end
     
     belongs_to  :conversation, class_name: 'Talk::Conversation'
-    embeds_many :messages,     class_name: message_class, as: :msg_dialog
+
+    # embeds_many :messages,     class_name: message_class, as: :msg_dialog
 
     field :spam,  type: Boolean,    default: false
     field :state, type: String,     default: default_state
@@ -19,6 +20,10 @@ module Talk
     
     field :initiator_read,     type: Boolean,    default: false
     field :receiver_read,      type: Boolean,    default: false
+
+    def message_class
+      self.class.message_class
+    end
 
     def system_read= value
       raise "System is not part of this conversation" if initiator.type != 'system'
@@ -58,20 +63,19 @@ module Talk
       get_read_for :tenant      
     end 
 
+    # Ensure last added message was indeed valid ;)
+    def add_message sender_type, message
+      if !self.messages.empty? && !self.messages.last.valid?
+        raise "add_message invalid message: #{self.messages.last.errors.inspect}"
+      end
+    end      
+
     # if you write a new message, you are assumed to have read the thread
     def write sender_type, message        
       read! normalized(sender_type)
       unread! normalized(reverse sender_type)
       add_message sender_type, message
-    end
-
-    def add_message sender_type, message
-      self.messages << new_message(sender_type, message)
-      self.save!       
-    end
-
-    def new_message sender_type, message
-      Talk::Property::Message.from normalized(sender_type), message, self
+      self.save!
     end
 
     def empty?

@@ -10,7 +10,7 @@ module Talk::Api::Landlord
     alias_method :tenant,   :receiver
 
     def receiver_class
-      Account::Tenant
+      User::Account::Tenant
     end
 
     def messenger_class

@@ -165,20 +165,20 @@ describe Talk::Api::System do
                   landlord.write('hello there').to(receiver).about(property).send_it!            
 
                   @landlord_conversation = landlord.conversation_with receiver
-                  puts "@landlord_conversation: #{@landlord_conversation.id}"
-                  puts "@conversation: #{@conversation.id}"
+                  # puts "@landlord_conversation: #{@landlord_conversation.id}"
+                  # puts "@conversation: #{@conversation.id}"
 
-                  puts "dialog: #{@landlord_conversation.dialogs.first.inspect}"
-                  puts "other: #{@conversation.dialogs.first.inspect}"                  
+                  # puts "dialog: #{@landlord_conversation.dialogs.first.inspect}"
+                  # puts "other: #{@conversation.dialogs.first.inspect}"                  
 
-                  puts receiver.property_conversations.first.dialogs.first.inspect
-                  puts receiver.property_conversations.last.dialogs.first.inspect
+                  # puts receiver.property_conversations.first.dialogs.first.inspect
+                  # puts receiver.property_conversations.last.dialogs.first.inspect
 
-                  receiver.property_conversations.to_a.each do |conv|
-                    puts "conv: #{conv.id}"
-                    puts "dialog: #{conv.dialogs.first.inspect}"
-                  end                  
-                  puts "====="
+                  # receiver.property_conversations.to_a.each do |conv|
+                  #   puts "conv: #{conv.id}"
+                  #   puts "dialog: #{conv.dialogs.first.inspect}"
+                  # end                  
+                  # puts "====="
                 end
 
                 it 'should have 1 read dialogs' do
@@ -225,6 +225,14 @@ describe Talk::Api::System do
                 it 'has 2 unread dialogs' do
                   expect(@landlord_conversation.unread_dialogs_count_for :tenant).to eq 1
                   # expect(receiver.unread_property_dialogs.count).to eq 2
+                end
+
+                it 'uses a real property' do
+                  expect(property).to be_a Property
+                end
+
+                it 'has property conversation about property' do
+                  expect(receiver.property_conversation(property, subject).property).to eq property
                 end
 
                 it 'has property conv with system' do

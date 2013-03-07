@@ -1,6 +1,7 @@
 module Talk
   class Conversation
     include BasicDocument
+    include Talk::Validation
 
     class InitiationError < StandardError; end
     class GeneralMessageError < StandardError; end

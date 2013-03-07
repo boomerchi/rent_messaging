@@ -2,8 +2,6 @@ module Talk::Api::User
   class PropertyConversator
     include_concerns :validation, for: 'Talk::Api'
 
-    
-
     DialogNotFoundError = ::Talk::Api::DialogNotFoundError
     GeneralMessageError = ::Talk::Conversation::GeneralMessageError
 
@@ -21,7 +19,6 @@ module Talk::Api::User
 
     alias_method :receiver,   :receiver_account
     alias_method :sender,     :sender_account
-    alias_method :property?,  :property
 
     def property
       @property ||= default_property
@@ -37,12 +34,18 @@ module Talk::Api::User
       self
     end
 
-    def send_it!
-      raise GeneralMessageError, "Property must be specified" unless property?
-      raise DialogNotFoundError, "No property dialog could be found for: #{self}" unless property_dialog
+    def has_property?
+       property? property
+     end
+
+    def send_it! which = :last
+      raise GeneralMessageError, "Property must be specified" unless has_property?
+      raise DialogNotFoundError, "No property dialog could be found for: #{self}" unless property_dialog which
       property_dialog.write(sender_type, message)
     end
 
+    # TODO: Why have two methods that do the same?
+    # note: send_it! used to take no which arg
     def send_to which = :last
       raise DialogNotFoundError, "No property dialog could be found for: #{self}, dialog: #{which}" unless property_dialog(which)
       dialog = property_dialog(which)

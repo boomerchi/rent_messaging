@@ -4,7 +4,7 @@ module Talk
       include BasicDocument
 
       def self.message_class
-        'Talk::Property::Message'
+        Talk::Property::Message
       end      
 
       field :state, type: String
@@ -15,7 +15,7 @@ module Talk
 
       belongs_to :conversation, class_name: 'Talk::Property::Conversation'
 
-      embeds_many :messages, class_name: message_class, as: :msg_dialog # inverse_of: :property_dialog
+      embeds_many :messages, class_name: message_class.to_s, inverse_of: :dialog
 
       scope :latest, -> { desc(:created_at) }
       scope :oldest, -> { asc(:created_at)  } 
@@ -25,6 +25,24 @@ module Talk
           self.state = system? ? :info : :interested
         end
       end
+
+      def add_message sender_type, message
+        msg = new_message(sender_type, message)
+        # puts "add prop msg: #{msg.inspect} - dialog: #{msg.dialog.inspect}"
+        self.messages << msg
+        super # validate added msg
+
+        # alternative way!
+        # args = message_class.msg_args_from(normalized(sender_type), message, self)
+        # puts "add and create msg: #{args}"
+        # self.messages.create args
+
+        self.save!
+      end
+
+      def new_message sender_type, message
+        message_class.from normalized(sender_type), message, self
+      end      
 
       class << self
         def messages state = nil

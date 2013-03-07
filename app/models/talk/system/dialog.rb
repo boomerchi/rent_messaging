@@ -12,7 +12,7 @@ module Talk
       end
 
       def self.message_class
-        'Talk::System::Message'
+        Talk::System::Message
       end      
 
       field :state, type: String, default: default_state
@@ -20,7 +20,7 @@ module Talk
 
       validates :state, presence: true, inclusion: {in: valid_states }
 
-      embeds_many :messages, class_name: message_class, as: :msg_dialog
+      embeds_many :messages, class_name: message_class.to_s, inverse_of: :dialog
 
       belongs_to :conversation, class_name: 'Talk::System::Conversation'
 
@@ -31,6 +31,19 @@ module Talk
       end
 
       delegate :replier, :receiver, :initiator, to: :conversation
+
+      def add_message sender_type, message
+        msg = new_message(message)
+
+        self.messages << msg
+        super # validate added msg
+        
+        self.save!
+      end
+
+      def new_message message
+        message_class.construct message, self
+      end
 
       def to_s
         %Q{

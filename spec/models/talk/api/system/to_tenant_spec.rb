@@ -43,7 +43,6 @@ describe Talk::Api::System do
           before do
             subject.write('hello you').to(receiver).about(property).send_it!            
             errs = subject.property_conversations.last.errors.inspect
-            puts "errs: #{errs.inspect}"
           end
 
           it 'should have a valid property conversation' do

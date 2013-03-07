@@ -3,8 +3,6 @@ class User::Account::Tenant
     extend ActiveSupport::Concern
 
     included do
-      puts "included: Tenant:Messaging for #{self}"
-
       has_many :property_conversations, class_name: 'Talk::Property::Conversation', inverse_of: :tenant
 
       include ::Talk::Api::Tenant      

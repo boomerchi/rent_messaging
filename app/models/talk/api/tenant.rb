@@ -14,9 +14,9 @@ module Talk
 
       def property_conversations_with account, property
         case account
-        when Account::Landlord
+        when User::Account::Landlord
           property_conversations.where(landlord: account, property: property)
-        when Account::System
+        when User::Account::System
           property_conversations.where(type: 'system', property: property)
         else
           raise ArgumentError, "Unsupported kind of account for property conversations search, was: #{account}"
@@ -46,7 +46,7 @@ module Talk
       end
 
       def valid_conversation_parties
-        [Account::Landlord, Account::System]
+        [User::Account::Landlord, User::Account::System]
       end
     end
   end

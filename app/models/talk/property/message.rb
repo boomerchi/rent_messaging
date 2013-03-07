@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Talk
   module Property
     class Message < Talk::Message
@@ -12,24 +14,41 @@ module Talk
 
       field :sender_type, type: String
 
-      validates :dialog,      presence: true
+      # Can't be validated since only updated as it saves
+      # validates :dialog,      presence: true
+
       validates :sender_type, presence: true, inclusion: {in: ['system', 'tenant', 'landlord']}
 
-      def self.from sender_type, message, dialog
-        self.create construct_args(sender_type, message, dialog)
-      end
+      class << self
+        include Talk::Message::Validation
 
-      protected
-
-      def self.construct_args sender_type, message, dialog
-        message_args(message).merge(sender_type: sender_type, dialog: dialog)
-      end
-
-      def self.message_args message
-        [:body, :state].each do |arg|
-          raise ArgumentError, "Message must contain #{arg}" unless message.respond_to?(arg)
+        def from sender_type, message, dialog
+          validate_dialog! dialog
+          args = construct_args(sender_type, message, dialog)
+          self.create args
         end
-        {body: message.body, state: message.type}
+
+        protected
+
+        def construct_args sender_type, message, dialog
+          validate_dialog! dialog
+          message_args(message).merge sender_type: sender_type, dialog: dialog
+        end
+
+        def message_args message
+          [:body, :state].each do |arg|
+            raise ArgumentError, "Message must contain #{arg}" unless message.respond_to?(arg)
+          end
+          {body: message.body, state: message.type}
+        end
+
+        def valid_dialog_class
+          @valid_dialog_class ||= "Talk::#{msg_type.to_s.camelize}::Dialog".constantize
+        end                      
+
+        def msg_type
+          :property
+        end
       end
     end
   end

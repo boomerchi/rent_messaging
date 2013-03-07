@@ -5,9 +5,11 @@ describe Talk::Api::Tenant::Messenger do
 
   let(:clazz)     { Talk::Api::Tenant::Messenger }
 
-  let(:landlord)  { create :landlord }
+  let(:landlord)  { create :landlord_w_property }
   let(:tenant)    { create :tenant }  
-  let(:property)  { create :property }    
+  let(:property)  { landlord.property }    
+
+  let(:landlord_without_property)  { create :landlord }
 
   let(:sender)    { tenant }
   let(:receiver)  { landlord }
@@ -31,19 +33,33 @@ describe Talk::Api::Tenant::Messenger do
 
     context 'create with tenant account and message text' do
       it 'should raise error' do
-        expect { clazz.new receiver, message }.to raise_error(ArgumentError)
+        expect { clazz.new receiver, message }.to raise_error(Talk::Conversation::SenderError)
       end
     end
   end
 
   describe 'initial state' do
-    its(:receiver) { should == nil }
-    its(:sender)   { should == sender }
+    it 'should not set receiver' do
+      expect(subject.receiver).to be_nil
+    end
 
-    its(:message)         { should be_a Hash }
+    it 'should set sender' do
+      expect(subject.sender).to eq sender
+    end
 
-    its('message.body')   { should == message }
-    its('message.type')   { should == :info }    
+    its(:message)  { should be_a Hash }
+
+    context 'message' do
+      subject { messenger.message }
+
+      it 'should have a body' do
+        expect(subject.body).to eq message
+      end
+
+      it 'should be :info type' do
+        expect(subject.type).to eq :info
+      end
+    end
   end
 
   describe 'API' do
@@ -58,6 +74,7 @@ describe Talk::Api::Tenant::Messenger do
     end
 
     describe 'to receiver' do 
+      let(:receiver)    { landlord_without_property }
       let(:conversator) { subject.to(receiver) }
 
       it 'should return property conversator' do

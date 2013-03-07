@@ -7,7 +7,7 @@ module Talk::Api::Tenant
     # protected
 
     def receiver_class
-      Account::Landlord
+      User::Account::Landlord
     end
 
     def messenger_class

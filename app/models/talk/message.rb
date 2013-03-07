@@ -1,6 +1,9 @@
+# encoding: utf-8
+
 module Talk
   class Message
     include BasicDocument
+    include Validation
 
     def self.thread_class
       ::Message::Dialog.to_s

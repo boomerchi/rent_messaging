@@ -2,6 +2,8 @@ module Talk::Api
   module Validation
     extend ActiveSupport::Concern
 
+    include ::Talk::Validation
+
     # sender
     def validate_sender! sender
       sender_error! sender unless valid_sender? sender
@@ -18,7 +20,7 @@ module Talk::Api
     # if landlord, there must already be a dialog started 
     # with at least one message from tenant or system
     def validate_sending!
-      return unless sender.kind_of? Account::Landlord
+      return unless landlord? sender
       get_property_dialog
     rescue Talk::Property::Conversation::NotFoundError
       raise Talk::Conversation::InitiationError, "Sender #{sender} can't initiate a conversation or dialog: receiver: #{receiver.inspect} property: #{property.inspect}"
@@ -46,17 +48,6 @@ module Talk::Api
       raise NotImplementedError, "Must be implemented by subclass"
     end
 
-    def validate_property!
-      validate_property property
-    end
-    
-    # property
-    def validate_property property
-      unless property.kind_of?(Property)
-        raise ArgumentError, "Must be a Property, was: #{property}"        
-      end
-    end    
-
     # messenger
 
     def validate_messenger! messenger
@@ -65,14 +56,6 @@ module Talk::Api
 
     def messenger_error! messenger
       raise ArgumentError, "Must be a #{messenger_class}, was: #{messenger}"    
-    end
-
-    def valid_messenger? messenger
-      messenger.kind_of? messenger_class
-    end
-
-    def messenger_class
-      Talk::Api::User::Messenger
     end
   end
 end

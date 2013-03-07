@@ -14,7 +14,7 @@ module Talk::Api::System
     end
 
     def validate_user user_account
-      unless user_account.kind_of?(Account::User)
+      unless user_account.kind_of?(User::Account::User)
         raise ArgumentError, "Must be an Account::User, was: #{user_account}"
       end
     end

@@ -5,7 +5,7 @@ module Talk::Api::Tenant
     end
 
     def sender_class
-      Account::Tenant
+      User::Account::Tenant
     end        
   end
 end
