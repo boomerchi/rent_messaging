@@ -1,6 +1,6 @@
-require 'support/models/account/user'
+require 'support/models/user/account/user'
 
-module Account
+module User::Account
   class Tenant < User
     include BasicDocument
 

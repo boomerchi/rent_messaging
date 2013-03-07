@@ -1,5 +1,5 @@
-module Account
-  class User < Base
+module User::Account
+  class User < Account::Base
     include BasicDocument
     
     field :name

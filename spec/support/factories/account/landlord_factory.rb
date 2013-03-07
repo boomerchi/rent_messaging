@@ -1,6 +1,6 @@
 FactoryGirl.define do
   # system -> tenant
-  factory :landlord_account, class: 'Account::Landlord', aliases: [:landlord] do  
+  factory :landlord_account, class: 'User::Account::Landlord', aliases: [:landlord] do  
     trait :valid do
       name 'landlord'
     end

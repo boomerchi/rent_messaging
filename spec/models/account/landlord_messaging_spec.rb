@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Account::Landlord do
-  describe Account::Landlord::Messaging do
+describe User::Account::Landlord do
+  describe User::Account::Landlord::Messaging do
     subject { landlord }
 
     let(:landlord)  { create :landlord_w_property, property_count: 3 }

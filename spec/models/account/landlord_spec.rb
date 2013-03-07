@@ -1,16 +1,21 @@
 require 'spec_helper'
 
-describe Account::Landlord do
+describe User::Account::Landlord do
   subject { landlord }
 
   let(:landlord)  { create :landlord_w_property }
 
   its(:valid?) { should be_true }
 
-  specify { subject.property.should be_a(Property) }
+  context 'landlord property' do
+    subject { landlord.property }
 
-  specify { subject.property.owner.should == subject }
+    it 'should be a property' do
+      expect(subject).to be_a Property
+    end
+
+    it 'should have an owner' do
+      expect(subject.owner).to eq landlord
+    end
+  end
 end
-
-
-

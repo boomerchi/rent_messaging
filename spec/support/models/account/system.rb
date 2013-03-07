@@ -1,3 +1,5 @@
+require 'support/models/account/base'
+
 module Account
   class System < Base
     include Singleton

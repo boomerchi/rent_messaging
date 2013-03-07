@@ -25,7 +25,7 @@ FactoryGirl.define do
 
     property  { FactoryGirl.create :valid_property }
 
-    system    { FactoryGirl.create :system }
+    system    { Account::System.instance }
     tenant    { FactoryGirl.create :tenant }
 
     after :build do |conversation, evaluator|
@@ -43,7 +43,7 @@ FactoryGirl.define do
 
     property  { FactoryGirl.create :valid_property }
 
-    system    { FactoryGirl.create :system }
+    system    { Account::System.instance }
     landlord  { FactoryGirl.create :landlord_w_property }
 
     after :build do |conversation, evaluator|

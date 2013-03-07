@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Account::Tenant do
-  describe Account::Tenant::Messaging do
+describe User::Account::Tenant do
+  describe User::Account::Tenant::Messaging do
     context 'System messages' do
       subject { tenant }
 

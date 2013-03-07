@@ -10,8 +10,8 @@ module Talk
       'Talk::Message'
     end
     
-    belongs_to :conversation, class_name: 'Talk::Conversation'
-    embeds_many :messages, class_name: message_class, as: :msg_dialog
+    belongs_to  :conversation, class_name: 'Talk::Conversation'
+    embeds_many :messages,     class_name: message_class, as: :msg_dialog
 
     field :spam,  type: Boolean,    default: false
     field :state, type: String,     default: default_state
@@ -84,7 +84,7 @@ module Talk
     alias_method :reversed, :reverse
 
     def normalize sender_type
-      type = sender_type.kind_of?(Account::Base) ? sender_type.type : sender_type
+      type = account?(sender_type) ? sender_type.type : sender_type
       raise "Invalid sender type" unless [:tenant, :landlord, :system].include? type.to_sym
       type.to_sym
     rescue
@@ -92,6 +92,9 @@ module Talk
     end
     alias_method :normalized, :normalize
 
+    def account? acc
+      acc.kind_of?(Account::Base)
+    end
 
     def read! sender_type
       set_read_for normalized(sender_type), true

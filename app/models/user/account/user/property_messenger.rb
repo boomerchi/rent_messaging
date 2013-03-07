@@ -1,4 +1,4 @@
-class Account::User
+class User::Account::User
   class PropertyMessenger
     attr_accessor :account, :target_account, :property
 
@@ -8,18 +8,20 @@ class Account::User
       end
       @account  = account
 
-      if property 
-        # TODO extract to validate method
-        unless property.kind_of?(Property)
-          raise ArgumentError, "Not a valid property. Was: #{property}"
-        end
-        @property = property
-      end
+      about(property) if property 
     end
 
     delegate :property_conversations, :system_conversations, to: :account
 
     alias_method :all_property_conversations, :property_conversations
+
+    def about property
+      # TODO extract to validate method
+      unless property.kind_of?(Property)
+        raise ArgumentError, "Not a valid property. Was: #{property}"
+      end
+      @property = property      
+    end
 
     def find_for target_account
       @target_account = target_account
@@ -35,16 +37,17 @@ class Account::User
       property_conversations.where property: property.id
     end
 
+    # TODO: Refator into shared module!
     def system?
       target_account.kind_of? Account::System
     end
 
     def landlord?
-      target_account.kind_of? Account::Landlord
+      target_account.kind_of? User::Account::Landlord
     end
 
     def tenant?
-      target_account.kind_of? Account::Tenant
+      target_account.kind_of? User::Account::Tenant
     end
 
     def property?

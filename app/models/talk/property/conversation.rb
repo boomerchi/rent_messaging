@@ -19,9 +19,9 @@ module Talk
       end
 
       # Can reference (belong) to Tenant and Landlord Accounts
-      belongs_to :tenant,     class_name: 'Account::Tenant',    inverse_of: :property_conversations
-      belongs_to :landlord,   class_name: 'Account::Landlord',  inverse_of: :property_conversations
-      belongs_to :system,     class_name: 'Account::System',    inverse_of: :property_conversations
+      belongs_to :tenant,     class_name: 'User::Account::Tenant',    inverse_of: :property_conversations
+      belongs_to :landlord,   class_name: 'User::Account::Landlord',  inverse_of: :property_conversations
+      belongs_to :system,     class_name: 'Account::System',          inverse_of: :property_conversations
 
       belongs_to :property,   class_name: property_class,       inverse_of: :conversations
 
@@ -38,7 +38,7 @@ module Talk
       # several renting sessions, with one Conversation Dialog 
       # for each period under discussion.
       after_initialize do
-        self.system = Account::System.instance if total_count == 1 && !(tenant? && landlord?)
+        self.system = system_account if total_count == 1 && !(tenant? && landlord?)
         self.type = self.system ? :system : :personal
         unless self.property
           self.property = landlord.property if landlord
@@ -53,7 +53,7 @@ module Talk
 
       # always create an initial dialog!
       after_save do
-        self.system = Account::System.instance if total_count == 1        
+        self.system = system_account if total_count == 1        
         self.type = system ? :system : :personal
         self.dialogs.create if dialogs.empty?
       end
@@ -72,6 +72,10 @@ module Talk
 
       scope :for,         -> account do         
           between(account)
+      end
+
+      def system_account
+        Account::System.instance
       end
 
       def as_string
@@ -144,10 +148,6 @@ module Talk
           accounts.flatten.find do |acc| 
             acc.type == 'landlord'
           end
-        end
-
-        def system_account
-          Account::System.instance
         end
 
         def account_hash_for account
@@ -313,11 +313,11 @@ module Talk
         end
                
         def tenant? account
-          account.kind_of?(Account::Tenant)
+          account.kind_of?(User::Account::Tenant)
         end
 
         def landlord? account
-          account.kind_of?(Account::Landlord)
+          account.kind_of?(User::Account::Landlord)
         end
       end
 

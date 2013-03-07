@@ -1,4 +1,4 @@
-class Account::Landlord
+class User::Account::Landlord
   module Messaging
     extend ActiveSupport::Concern
 
@@ -37,7 +37,7 @@ class Account::Landlord
     protected
 
     def valid_conversation_targets
-      [Account::Tenant, Account::System]
+      [User::Account::Tenant, Account::System]
     end
   end
 end

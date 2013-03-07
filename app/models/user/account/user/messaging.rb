@@ -1,4 +1,4 @@
-class Account::User
+class User::Account::User
   module Messaging
     extend ActiveSupport::Concern
 
@@ -106,10 +106,14 @@ class Account::User
     end
 
     def property_messenger property = nil
-      Account::User::PropertyMessenger.new self, property
+      property_messenger_class.new self, property
     end
 
     protected
+
+    def property_messenger_class
+      User::Account::User::PropertyMessenger
+    end
 
     def valid_conversation_target? account
       valid_conversation_targets.any? {|clazz| account.kind_of? clazz }
